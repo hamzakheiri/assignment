@@ -28,6 +28,7 @@ export class FormSubmitionController {
     
     @Get()
     getFormSubmition() {
+        // console.log('getFormSubmition');
         return this.formSubmitionService.getFormSubmition();
     }
 
