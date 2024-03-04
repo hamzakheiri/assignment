@@ -6,6 +6,6 @@ WORKDIR /app
 
 COPY  . .
 
-# RUN chmod +x setup.sh
+RUN [ -e "node_modules" ] && echo "node_modules exists" || npm install
 
-ENTRYPOINT [ "bash" ]
+ENTRYPOINT [ "npm", "run", "start:dev" ]
