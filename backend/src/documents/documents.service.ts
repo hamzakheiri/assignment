@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Document } from './entities/document.entity';
@@ -20,14 +20,23 @@ export class DocumentsService {
         return this.documentRepository.save(document);
     }
 
-    async getDocumentById(id: number){
-        const document = await this.documentRepository.findOne({where: {id}});
-        if (!document) throw new Error('Document not found');
-
+    async getDocumentById(id: string){
+        if (isNaN(parseInt(id))) throw new BadRequestException('Invalid id provided');
+        const document = await this.documentRepository.findOne({
+            select: ['id', 'title', 'size'],
+            where: {id: parseInt(id)}
+        });
+        if (!document) throw new NotFoundException('Document not found');
         return document;
     }
 
+    async getFullDucomentById(id: string){
+        if (isNaN(parseInt(id))) throw new BadRequestException('Invalid id provided');
+        const document = await this.documentRepository.findOne({where: {id: parseInt(id)}});
+        if (!document) throw new NotFoundException('Document not found');
+        return document;
+    }
     getAllDocuments(){
-        return this.documentRepository.find();
+        return this.documentRepository.find({select: ['id', 'title', 'size']});
     }
 }

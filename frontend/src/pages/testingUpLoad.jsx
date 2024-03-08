@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button } from '@mui/material'
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
-import { FaCloudUploadAlt } from "react-icons/fa";
+import { FaCloudUploadAlt } from 'react-icons/fa';
 
 const TestingUpload = () => {
     const [selectedFile, setSelectedFile] = useState();
