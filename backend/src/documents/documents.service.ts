@@ -2,6 +2,8 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Document } from './entities/document.entity';
+import * as mimeType from 'mime-types';
+
 
 @Injectable()
 export class DocumentsService {
@@ -30,12 +32,15 @@ export class DocumentsService {
         return document;
     }
 
-    async getFullDucomentById(id: string){
+    async getFullDocumentById(id: string){
+        // const mime = new Mime();
         if (isNaN(parseInt(id))) throw new BadRequestException('Invalid id provided');
         const document = await this.documentRepository.findOne({where: {id: parseInt(id)}});
         if (!document) throw new NotFoundException('Document not found');
+        // console.log("mime type: ", mimeType.lookup(document.title));
         return document;
     }
+    
     getAllDocuments(){
         return this.documentRepository.find({select: ['id', 'title', 'size']});
     }
