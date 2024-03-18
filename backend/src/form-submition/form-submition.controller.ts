@@ -21,15 +21,18 @@ export class FormSubmitionController {
 
     @Post('interface3/personal')
     submitFom3Per(@Body() formData: createForm3PersonalDto ) {
-        // console.log(formData);
-        return this.formSubmitionService.submitInter3Per(formData);;
-        // return ;
+        return this.formSubmitionService.submitInter3Per(formData);
     }
     
     @Get()
     getFormSubmition() {
         // console.log('getFormSubmition');
         return this.formSubmitionService.getFormSubmition();
+    }
+
+    @Get("/:id")
+    getFormSubmitionById(@Param('id') id: string) {
+        return this.formSubmitionService.getFormSubmitionById(id);
     }
 
     @Delete('/:id')

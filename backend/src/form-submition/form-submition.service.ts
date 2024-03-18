@@ -46,6 +46,13 @@ export class FormSubmitionService {
         return this.formSubmitionRepository.find();
     }
 
+    getFormSubmitionById(id: string) {
+        const form = this.formSubmitionRepository.find({where: { id: parseInt(id)}});
+        if (!form)
+            throw new NotFoundException(`commmand with id ${id} not found.`);
+        return form;
+    }
+
     async deleteFormSubmition(id: string) {
         const res = await this.formSubmitionRepository.findOne({where: { id: parseInt(id)}});
         if (!res)

@@ -3,7 +3,6 @@ import { Button } from '@mui/material'
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
-import FileDownload from '../components/FileDownload';
 
 const TestingUpload = () => {
     const [selectedFile, setSelectedFile] = useState();
@@ -52,15 +51,7 @@ const TestingUpload = () => {
     }, [selectedFile]);
 
     return (
-        <div style={{
-            width: "500px",
-            height: "500px",
-            display: "flex",
-            flexDirection: 'column',
-            justifyContent: "center",
-            alignItems: "center"
-        }}>
-            <Button
+            <Button click={undefined}
                 component="label"
                 role={undefined}
                 variant="contained"
@@ -71,10 +62,7 @@ const TestingUpload = () => {
                 <VisuallyHiddenInput type="file" onChange={handleFileChange}/>
             </Button>
 
-            <FileDownload> </FileDownload>
-
-            
-        </div>
+            // <FileDownload documentId={1}> Upload </FileDownload>
     )
 }
 
